@@ -39,3 +39,15 @@ stages:
         sourceImageTag: $(Build.BuildId)
         pushTag: $(Build.BuildId)
         repositoryName: 'hello-world'
+
+    - task: AWSShellScript@1
+      displayName: 'Configure kubeconfig'
+      inputs:
+        awsCredentials: 'awsCredentials'
+        regionName: 'eu-west-1'
+        scriptType: 'inline'
+        inlineScript: |
+          aws eks update-kubeconfig --region eu-west-1 --name my-cluster
+          cat /home/vsts/.kube/config
+          kubectl apply -f hello-world.yml
+          aws ecr describe-images --repository-name hello-world --query 'sort_by(imageDetails,& imagePushedAt)[-1].imageTags[0]'
