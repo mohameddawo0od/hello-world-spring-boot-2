@@ -27,3 +27,15 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+        buildContext: '$(Build.SourcesDirectory)'
+        repository: '180729926970.dkr.ecr.eu-west-1.amazonaws.com/hello-world'
+
+    - task: ECRPushImage@1
+      inputs:
+        awsCredentials: 'awsCredentials'
+        regionName: 'eu-west-1'
+        imageSource: 'imagename'
+        sourceImageName: '180729926970.dkr.ecr.eu-west-1.amazonaws.com/hello-world'
+        sourceImageTag: $(Build.BuildId)
+        pushTag: $(Build.BuildId)
+        repositoryName: 'hello-world'
