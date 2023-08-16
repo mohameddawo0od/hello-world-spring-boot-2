@@ -41,7 +41,7 @@ stages:
         repositoryName: 'hello-world'
 
     - task: AWSShellScript@1
-      displayName: 'Configure kubeconfig'
+      displayName: 'Deploy to EKS'
       inputs:
         awsCredentials: 'awsCredentials'
         regionName: 'eu-west-1'
