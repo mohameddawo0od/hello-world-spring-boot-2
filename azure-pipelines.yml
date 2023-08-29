@@ -6,7 +6,11 @@ trigger:
 - master
 
 resources:
-- repo: self
+#- repo: self
+  webhooks:
+    - webhook: FirstWebHook
+      connection: FirstWebHook
+
 
 variables:
   tag: '$(Build.BuildId)'
