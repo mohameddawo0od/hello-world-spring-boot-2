@@ -29,7 +29,7 @@ stages:
         targetType: 'inline'
         ### JSON payload data is available in the form of ${{ parameters.<WebhookAlias>.<JSONPath>}}
         script: |
-          echo ${{ parameters.one}}
+          echo ${{parameters.one}}
 
     - task: Docker@2
       displayName: Build an image
